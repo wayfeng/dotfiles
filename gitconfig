@@ -1,0 +1,36 @@
+[core]
+    editor = vim
+    excludesfile = /home/wayne/.gitignore
+    filemode = false
+[user]
+    name = <name>
+    email = <email>
+[color]
+    ui = auto
+    diff = auto
+[push]
+    default = matching
+[alias]
+    co = checkout
+    ci = commit
+    br = branch
+    st = status
+    df = diff
+    gr = log --graph --branches --oneline --decorate
+    unstage = reset HEAD --
+	ll = log --oneline
+	last = log -1 HEAD --stat
+[log]
+    date = short
+
+#[url "https://git.busybox.net/"]
+    #insteadOf = git://git.busybox.net/
+
+[http]
+    proxy = <proxy:port>
+[https]
+    proxy = <proxy:port>
+[advice]
+	detachedHead = false
+[init]
+	defaultBranch = main
