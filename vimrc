@@ -1,3 +1,4 @@
+" file: $HOME/.vimrc
 "set nocompatible
 filetype on
 filetype plugin on

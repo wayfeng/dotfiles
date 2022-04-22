@@ -1,7 +1,8 @@
+;; file: $HOME/.emacs.d/init.el
 ;; when using emacs behind proxy
-(setq url-proxy-services '(("no_proxy" . "bj.intel.com")
-                           ("http" . "proxy-prc.intel.com:912")
-                           ("https" . "proxy-prc.intel.com:912")))
+(setq url-proxy-services '(("no_proxy" . "")
+                           ("http" . "<host>:<port>")
+                           ("https" . "<host>:<port>")))
 
 ;; configure package archives
 (require 'package)
@@ -15,15 +16,24 @@
 ;; setup default coding
 (prefer-coding-system 'utf-8)
 
-;; key bind.
-(global-set-key [(meta g)] 'goto-line)
-(global-set-key [(meta left)] 'backward-sexp)
-(global-set-key [(meta right)] 'forward-sexp)
-(global-set-key [(meta n)] 'hippie-expand)
-(global-set-key [(f9)] 'undo)
-(global-set-key [(f10)] 'redo)
-(global-set-key [(ctrl .)] 'imenu)
-(global-set-key [(ctrl \;)] 'comment-or-uncomment-region)
+;; Key bind.
+;(global-set-key [(meta g)] 'goto-line)
+;(global-set-key [(meta left)] 'backward-sexp)
+;(global-set-key [(meta right)] 'forward-sexp)
+;(global-set-key [(meta n)] 'hippie-expand)
+;(global-set-key [(f9)] 'undo)
+;(global-set-key [(f10)] 'redo)
+;(global-set-key [(ctrl .)] 'imenu)
+;(global-set-key [(ctrl \;)] 'comment-or-uncomment-region)
+
+(define-key global-map (kbd "M-g") 'goto-line)
+(define-key global-map (kbd "M-n") 'hippie-expand)
+(define-key global-map (kbd "M-<left>") 'backward-sexp)
+(define-key global-map (kbd "M-<right>") 'forward-sexp)
+(define-key global-map (kbd "<f9>") 'undo)
+(define-key global-map (kbd "<f10>") 'redo)
+(define-key global-map (kbd "C-.") 'imenu)
+(define-key global-map (kbd "C-;") 'comment-or-uncomment-region)
 
 ;; enable yasnippet globally
 (yas-global-mode 1)
@@ -146,8 +156,17 @@
   (interactive)
   (insert "File: " (buffer-name) "\n"))
 
+(require 'pabbrev)
+(pabbrev-mode t)
 ;; org-mode settings.
 (setq org-hide-leading-stars t)
+(setq org-hide-emphasis-markers t)
+(setq org-agenda-files '("~/gtd/todo.org"))
+(setq org-capture-templates '(("t" "TODO tasks" entry
+                               (file+headline "~/gtd/todo.org" "Tasks")
+                               "* TODO %i%?")))
+(setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+
 (setq org-enforce-todo-dependencies t)
 (setq org-log-done 'time)
 ; (setq org-agenda-include-diary t)
@@ -155,7 +174,7 @@
 (define-key global-map "\C-ca" 'org-agenda)
 ; (define-key global-map "\C-cb" 'org-iswitchb)
 (setq org-default-notes-file '("~/notes/quicknotes.org"))
-; (define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-cc" 'org-capture)
 ;; (setq org-tag-alist
 ;;       '(
 ;;         ("@home" . ?h)
@@ -165,7 +184,7 @@
 ;;         ("research" . ?t)
 ;;         ))
 ;; (require 'org-publish)
-(setq org-html-postamble-format '(("en" "Last updated by %e on %C")))
+;; (setq org-html-postamble-format '(("en" "Last updated by %e on %C")))
 ;; (defface org-block-begin-line
 ;;   '((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF")))
 ;;   "Face used for the line delimiting the begin of source blocks.")
@@ -203,7 +222,7 @@
         ("notes-static"
          :base-directory "~/notes"
          :base-extension "css\\|js\\|png\\|jpg\\|gif"
-         :publishing-directory "/srv/wayne/Public/notes"
+         :publishing-directory "~/htmls"
          :recursive t
          :publishing-function org-publish-attachment
          )
@@ -215,8 +234,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ediff-split-window-function 'split-window-horizontally)
- '(org-agenda-files '("~/workspace/scheds.org"))
+ '(ediff-split-window-function 'split-window-horizontally))
  '(package-selected-packages
    '(docker-compose-mode dockerfile-mode yaml-imenu yaml-mode htmlize solarized-theme rust-mode go-mode imenu-list markdown-mode yasnippet auto-complete)))
 
