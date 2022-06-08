@@ -1,8 +1,11 @@
-;; configure package repos
+;; when using emacs behind proxy
+(setq url-proxy-services '(("no_proxy" . "bj.intel.com")
+                           ("http" . "child-prc.intel.com:913")
+                           ("https" . "child-prc.intel.com:913")))
+
+;; configure package archives
 (require 'package)
-(setq package-archives
-      '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-        ("melpa" . "https://melpa.org/packages/")))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 ;; setup default coding
@@ -18,17 +21,13 @@
 ;; disable startup message
 (setq inhibit-startup-message t)
 
-;; theme
-(use-package gruvbox-theme :config (load-theme 'gruvbox-dark-medium t))
-
 ;; Looking settings.
-(set-frame-font "mononoki 15")
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
 (show-paren-mode t)
-; (mwheel-install)
+;; (mwheel-install)
 ;; (focus-follows-mouse t)
 ;; (mouse-autoselect-window t)
 (display-time)
@@ -40,7 +39,7 @@
 ;; (mouse-avoidance-mode t)
 (blink-cursor-mode 0)                   ; no blinking cursor
 
-(auto-image-file-mode t)
+;; (auto-image-file-mode t)
 
 ;; basic settings
 (setq require-final-newline nil)        ; always newline at end of file
@@ -58,9 +57,9 @@
 ;; Backup settings.
 (setq make-backup-files nil)
 ;; open reserved workspace when startup
-(setq desktop-path '("~/.emacs.d/"))
-(load "desktop")
-(desktop-save-mode 1)
+;; (setq desktop-path '("~/.emacs.d/"))
+;; (load "desktop")
+(desktop-save-mode 0)
 
 ;; personal info
 (setq user-full-name "Wayne Feng")
@@ -98,3 +97,9 @@
 (use-package auto-complete :config (ac-config-default))
 
 ; (use-package pabbrev)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(trailing-whitespace ((t (:background "gold")))))
