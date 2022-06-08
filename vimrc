@@ -43,7 +43,7 @@ set wrap
 " always show status bar
 set laststatus=2
 " add some space to left boarder
-set foldcolumn=0
+set foldcolumn=2
 
 "highlight ColorColumn ctermbg=darkgray
 "set colorcolumn=120
@@ -51,7 +51,9 @@ set foldcolumn=0
 
 syntax enable
 try
-    colorscheme desert
+    "colorscheme monokai
+    set background=dark
+    colorscheme gruvbox
 catch
 endtry
 
@@ -76,10 +78,6 @@ set diffopt+=iwhite
 " augroup filetype
   " autocmd FileType xml '[,']!xsltproc indent.xsl %
 " augroup END
-
-call plug#begin()
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-call plug#end()
 
 " cscope settings
 if has("cscope")
