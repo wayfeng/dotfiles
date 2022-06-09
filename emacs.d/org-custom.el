@@ -11,11 +11,13 @@
 
 (setq org-directory "~/notes")
 (setq org-default-notes-file (concat org-directory "/quicknotes.org"))
-(setq org-agenda-files '("~/gtd/gtd.org"
-                         "~/gtd/todo.org"))
-(setq org-capture-templates '(("t" "TODO tasks" entry
-                               (file+headline "~/gtd/todo.org" "Tasks")
-                               "* TODO %i%?\n  SCHEDULED %T" :empty-lines 1)))
+(setq org-agenda-files '("~/gtd/gtd.org"))
+(setq org-capture-templates
+      '(("t" "TODO tasks" entry (file+headline "~/gtd/gtd.org" "Tasks")
+         "* TODO %i%?\n  SCHEDULED %T" :empty-lines 1)
+        ("j" "Journal" entry (file+datetree "~/gtd/journal.org")
+         "* %?\nEntered on %U\n %i\n %a")))
+
 (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "DELEGATED(g)" "|" "DONE(d)" "CANCELLED(c)")))
 
 (setq org-log-done 'time)
